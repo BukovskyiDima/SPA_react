@@ -1,5 +1,19 @@
-import imported from './test'
+import './app.scss';
+import './fakeServer';
+import { Router, browserHistory } from 'react-router';
 
-function test() {
-    imported();
-}
+...
+
+const rootRoute = {
+    path: '/',
+    component: Main,
+
+    childRoutes: []
+};
+
+ReactDOM.render((
+    <Router
+        history={browserHistory}
+        routes={rootRoute}
+    />
+), document.getElementById('root'));
