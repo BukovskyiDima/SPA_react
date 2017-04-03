@@ -1,23 +1,23 @@
 import fetchMock from 'fetch-mock';
 
 const user = {
-  user: {
-    name: 'admin',
-    password: '12345'
-  }
+  name: 'admin',
+  password: '12345'
 };
 
 const storage = (key, value) => {
   const ls = localStorage;
-  const serverData = ls.server ? JSON.stringify(ls.server) : Object.assign({}, user);
+  const serverData = ls.server ? JSON.stringify(ls.server) : {};
 
   if (value) {
     serverData[key] = value;
-    ls.server = serverData;
+    ls.server = JSON.stringify(serverData);
   }
 
   return serverData[key];
 };
+
+storage('user', user);
 
 fetchMock.post('login', (url, options) => {
   const body = options.body,

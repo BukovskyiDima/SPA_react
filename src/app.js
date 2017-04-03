@@ -1,10 +1,12 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
+import { browserHistory, Router, Route } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import Greeting from 'routes/Greeting';
 import Login from 'routes/Login';
-import './app.scss';
+import Main from 'routes/Main/Main';
 import './fakeServer';
-import Main from './routes/Main/Main';
+import './app.scss';
 
 const rootRoute = {
   path: '/',
@@ -18,7 +20,13 @@ const rootRoute = {
 
 ReactDOM.render((
   <Router
-    history={browserHistory}
-    routes={rootRoute}
-  />
+    history={createHistory()}
+  >
+    <div>
+      <Route path="/" component={Main} />
+      <Route path="/greeting" component={Greeting} />
+      <Route path="/login" component={Login} />
+    </div>
+
+  </Router>
 ), document.getElementById('root'));
